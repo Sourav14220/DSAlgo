@@ -43,6 +43,7 @@ void printNode(Node* dummyHead) {
 void searchNode(Node* dummyHead, int key) {
   if(dummyHead == NULL) {
     printf("Not Found!\n");
+   return;
   }
   int flag = 0;
   Node* helper = dummyHead -> nextptr;
