@@ -17,7 +17,7 @@ void createNode(Node* dummyHead, int value) {
 void insertAtHead(Node* dummyHead, int value) {
   Node* helper = dummyHead -> nextptr;
   Node *newNode = malloc(sizeof(Node));
-  newNode ->  data = value;
+  newNode -> data = value;
   newNode -> nextptr = helper -> nextptr;
   helper -> nextptr = newNode;
 }
@@ -67,6 +67,25 @@ void deleteTail(Node* dummyHead) {
   }
   helper -> nextptr = helper -> nextptr -> nextptr;
 }
+void deleteAtPosition(Node* dummyHead, int index) {
+ Node* helper = dummyHead;
+ while(index--) {
+  helper = helper -> nextptr;
+ }
+ helper -> nextptr = helper -> nextptr -> nextptr;
+}
+void insertAtPosition(Node* dummyHead, int value, int index) {
+  Node *newNode = malloc(sizeof(Node));
+  newNode ->  data = value;
+  newNode -> nextptr = NULL;
+  Node* helper = dummyHead;
+  while(index--) {
+    helper = helper -> nextptr;
+  }
+  Node* nextTrack = helper -> nextptr;
+  helper -> nextptr = newNode;
+  newNode -> nextptr = nextTrack;
+}
 int main( ) {
   Node *dummyHead = NULL;
   ///create nodes
@@ -76,9 +95,11 @@ int main( ) {
   printNode(&dummyHead);
   ///insert at the beginning
   insertAtHead(&dummyHead, 2);
+  insertAtHead(&dummyHead, 8);
   printNode(&dummyHead);
   ///insert at the last
   insertAtTail(&dummyHead, 9);
+  insertAtTail(&dummyHead, 11);
   printNode(&dummyHead);
   ///search an element
   searchNode(&dummyHead, 5);
@@ -87,6 +108,12 @@ int main( ) {
   printNode(&dummyHead);
   ///delete the last element
   deleteTail(&dummyHead);
+  printNode(&dummyHead);
+  ///delete at any position
+  deleteAtPosition(&dummyHead, 3);
+  printNode(&dummyHead);
+  ///Insert at any position
+  insertAtPosition(&dummyHead, 12, 3);
   printNode(&dummyHead);
   return 0;
 }
